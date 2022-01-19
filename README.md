@@ -9,6 +9,8 @@ npm install
 npm start
 ```
 
+After `npm start` the output would look like [this](#log-output)
+
 **tsconfig.json**
 
 The following `compilerOptions` is **important** to enable use of Decorators in Typescript
@@ -97,6 +99,8 @@ function MyParameterDecorator(): ParameterDecorator {
 ```
 
 ## Log Output
+
+Output would look like this after `npm start`
 
 ```ts
 MyPropertyDecorator
@@ -208,6 +212,6 @@ Hi my name is John Doe
 
 ### References
 
--   typescriptlang.org/docs/handbook/decorators.html
+-   https://www.typescriptlang.org/docs/handbook/decorators.html
 
 With the introduction of Classes in TypeScript and ES6, there now exist certain scenarios that require additional features to support annotating or modifying classes and class members. Decorators provide a way to add both annotations and a meta-programming syntax for class declarations and members. Decorators are a stage 2 proposal for JavaScript and are available as an experimental feature of TypeScript.
