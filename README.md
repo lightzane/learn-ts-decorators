@@ -1,6 +1,6 @@
 # learn-ts-decorators
 
-![Typescript](https://img.shields.io/badge/typescript-4.5.4-blue)
+![Typescript](https://img.shields.io/badge/typescript-5.2.2-blue)
 
 Learning the basics on how to create and use **Decorators** in Typescript.
 
@@ -209,6 +209,9 @@ MyClassDecorator
 John Doe
 Hi my name is John Doe
 ```
+
+### Learn More
+-   [Transform Decorator](https://github.com/lightzane/learn-ts-decorators/tree/transform): https://github.com/lightzane/learn-ts-decorators/tree/transform
 
 ### References
 
