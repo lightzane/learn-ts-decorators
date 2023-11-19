@@ -23,7 +23,7 @@ function MyMethodDecorator(): MethodDecorator {
 }
 
 function MyParameterDecorator(): ParameterDecorator {
-    return (target: Object, propertyKey: string | symbol, parameterIndex: number) => {
+    return (target: Object, propertyKey: string | symbol | undefined, parameterIndex: number) => {
         console.log(MyParameterDecorator.name);
         console.log({ target, propertyKey, parameterIndex });
         console.log('-------------------------------------------------------------');
