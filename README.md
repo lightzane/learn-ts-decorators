@@ -114,6 +114,78 @@ manager.getItems().then(console.log);
 // -> [ 'apple', 'banana', 'cherry', 'lemon' ]
 ```
 
+### Custom format
+
+Enable consumers to provide their custom format by providing config params in the decorator.
+
+Add `config` params and update the `logger()` inside the decorator
+
+```ts
+type FormatData = {
+  className: string;
+  methodName: string;
+  responseTime: number;
+};
+
+type ConsoleLoggerConfig = {
+  format: (data: FormatData) => string;
+};
+
+export function ConsoleLogger(config?: ConsoleLoggerConfig): MethodDecorator {
+  // ...rest of code here (hidden for brevity)
+
+  const logger = (responseTime: number) => {
+    // Default format
+    if (!config || !config.format) {
+      console.log(
+        `[Class] ${className} [Method] ${String(
+          propertyKey,
+        )} took ${responseTime}ms`,
+      );
+      return;
+    }
+
+    // Custom format
+    const custom = config.format({
+      className,
+      methodName: String(propertyKey),
+      responseTime,
+    });
+
+    console.log(custom);
+  };
+
+  // ...rest of code here
+}
+```
+
+### Usage
+
+`index.ts` - Update the method decorators within `FruitManager` class
+
+```ts
+@ConsoleLogger({
+    format: ({ methodName, responseTime }) => `${methodName}=${responseTime}ms`,
+})
+async getItems() {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    return this.items;
+}
+
+@ConsoleLogger({ format: () => `adding items...` })
+addItems(...fruits: string[]) {
+    this.items.push(...fruits);
+}
+```
+
+**Output**
+
+```bash
+adding items...
+getItems=3019ms
+[ 'apple', 'banana', 'cherry', 'lemon' ]
+```
+
 ## Winston
 
 TODO

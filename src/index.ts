@@ -3,13 +3,15 @@ import { ConsoleLogger } from './decorators';
 class FruitManager {
   private items: string[] = [];
 
-  @ConsoleLogger()
+  @ConsoleLogger({
+    format: ({ methodName, responseTime }) => `${methodName}=${responseTime}ms`,
+  })
   async getItems() {
     await new Promise((resolve) => setTimeout(resolve, 3000));
     return this.items;
   }
 
-  @ConsoleLogger()
+  @ConsoleLogger({ format: () => `adding items...` })
   addItems(...fruits: string[]) {
     this.items.push(...fruits);
   }

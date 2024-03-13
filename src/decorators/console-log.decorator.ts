@@ -1,4 +1,14 @@
-export function ConsoleLogger(): MethodDecorator {
+type FormatData = {
+  className: string;
+  methodName: string;
+  responseTime: number;
+};
+
+type ConsoleLoggerConfig = {
+  format: (data: FormatData) => string;
+};
+
+export function ConsoleLogger(config?: ConsoleLoggerConfig): MethodDecorator {
   return function (
     target: Object,
     propertyKey: string | symbol,
@@ -9,11 +19,24 @@ export function ConsoleLogger(): MethodDecorator {
     const isAwaiter = /__awaiter/.test(originalMethod.toString());
 
     const logger = (responseTime: number) => {
-      console.log(
-        `[Class] ${className} [Method] ${String(
-          propertyKey,
-        )} took ${responseTime}ms`,
-      );
+      // Default format
+      if (!config || !config.format) {
+        console.log(
+          `[Class] ${className} [Method] ${String(
+            propertyKey,
+          )} took ${responseTime}ms`,
+        );
+        return;
+      }
+
+      // Custom format
+      const custom = config.format({
+        className,
+        methodName: String(propertyKey),
+        responseTime,
+      });
+
+      console.log(custom);
     };
 
     // * ASYNC Function
