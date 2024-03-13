@@ -1,1 +1,2 @@
-export * from './console-log.decorator';
+export * from './log.decorator';
+export * from './logger.decorator';

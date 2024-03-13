@@ -1,17 +1,16 @@
-import { ConsoleLogger } from './decorators';
+import { Log, Logger } from './decorators';
 
+@Logger()
 class FruitManager {
   private items: string[] = [];
 
-  @ConsoleLogger({
-    format: ({ methodName, responseTime }) => `${methodName}=${responseTime}ms`,
-  })
+  @Log()
   async getItems() {
     await new Promise((resolve) => setTimeout(resolve, 3000));
     return this.items;
   }
 
-  @ConsoleLogger({ format: () => `adding items...` })
+  @Log()
   addItems(...fruits: string[]) {
     this.items.push(...fruits);
   }
